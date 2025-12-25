@@ -37,8 +37,8 @@ class RecordingController(private val context: Context) {
             action = Constants.ACTION_START_RECORDING
             putExtra(Constants.EXTRA_RESULT_CODE, resultCode)
             putExtra(Constants.EXTRA_RESULT_DATA, data)
-            // Note: RecordingConfig needs to be Parcelable for this to work in production
-            // For now, we'll pass individual values in the service
+            putExtra(Constants.EXTRA_AUDIO_SOURCE, config.audioSource.name)
+            putExtra(Constants.EXTRA_VIDEO_QUALITY, config.videoQuality.name)
         }
         context.startForegroundService(intent)
     }

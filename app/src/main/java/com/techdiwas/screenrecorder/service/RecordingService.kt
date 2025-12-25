@@ -72,6 +72,17 @@ class RecordingService : Service() {
                 val resultCode = intent.getIntExtra(Constants.EXTRA_RESULT_CODE, -1)
                 val data = intent.getParcelableExtra<Intent>(Constants.EXTRA_RESULT_DATA)
                 
+                // Get configuration from intent
+                val audioSourceName = intent.getStringExtra(Constants.EXTRA_AUDIO_SOURCE)
+                val videoQualityName = intent.getStringExtra(Constants.EXTRA_VIDEO_QUALITY)
+                
+                if (audioSourceName != null) {
+                    audioSource = AudioSource.valueOf(audioSourceName)
+                }
+                if (videoQualityName != null) {
+                    videoQuality = VideoQuality.valueOf(videoQualityName)
+                }
+                
                 if (resultCode != -1 && data != null) {
                     startRecording(resultCode, data)
                 }
