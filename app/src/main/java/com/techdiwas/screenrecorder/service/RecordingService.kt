@@ -211,6 +211,9 @@ class RecordingService : Service() {
             MediaRecorder()
         }.apply {
             // Set audio source first if needed
+            // TODO: Support AudioPlaybackCapture for device audio on Android 10+ (API 29+)
+            // This requires AudioPlaybackCaptureConfiguration and is optional.
+            // For now, only microphone audio is supported.
             if (audioSource != AudioSource.NONE) {
                 setAudioSource(MediaRecorder.AudioSource.MIC)
             }
