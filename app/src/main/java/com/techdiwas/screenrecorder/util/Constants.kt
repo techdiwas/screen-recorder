@@ -19,6 +19,8 @@ object Constants {
     const val EXTRA_RESULT_CODE = "result_code"
     const val EXTRA_RESULT_DATA = "result_data"
     const val EXTRA_CONFIG = "config"
+    const val EXTRA_AUDIO_SOURCE = "audio_source"
+    const val EXTRA_VIDEO_QUALITY = "video_quality"
     
     // Recording
     const val FRAME_RATE = 30

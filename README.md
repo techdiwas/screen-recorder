@@ -5,12 +5,12 @@ A modern Android screen recorder app built with Jetpack Compose and Material 3.
 ## Features
 
 - 🎥 Screen recording with MediaProjection API
-- 🎤 Audio options: Microphone, Device Audio, or Both
+- 🎤 Audio recording: Microphone (Device audio support planned for future)
 - 📹 Video quality: 480p, 720p, 1080p
 - ⏱️ 3-second countdown before recording
-- 🎯 Floating overlay controls
+- 🎯 Floating overlay controls (in development)
 - 💾 Auto-save to Movies/ScreenRecords
-- 🔔 Recording notification
+- 🔔 Recording notification with foreground service
 
 ## Tech Stack
 
@@ -71,12 +71,30 @@ app/src/main/java/com/techdiwas/screenrecorder/
 └── util/       # Constants, Permissions
 ```
 
+## Known Limitations & Future Enhancements
+
+- **Device Audio (Internal Audio)**: Currently only microphone audio is supported. System audio recording using AudioPlaybackCapture API (Android 10+) is planned for a future release. This requires additional permissions and configuration.
+- **Overlay Controls**: Basic implementation is present; advanced draggable controls are in development.
+
 ## Testing
 
 ```bash
 # Run unit tests
 ./gradlew test
 ```
+
+### Device Testing Required
+
+The following features require testing on a real Android device (API 26+):
+
+- **Screen recording** - MediaProjection requires actual device screen
+- **Foreground service** - Service notification behavior
+- **Runtime permissions** - RECORD_AUDIO, POST_NOTIFICATIONS, SYSTEM_ALERT_WINDOW
+- **Overlay controls** - Floating window functionality
+- **File storage** - Recording saved to Movies/ScreenRecords
+- **Lifecycle handling** - App background/foreground transitions
+
+**Note**: Emulator testing is limited for screen recording features.
 
 ## CI/CD
 

@@ -102,6 +102,7 @@ fun MainScreen(
                     )
                     recordingController.startRecording(result.resultCode, result.data!!, config)
                     
+                    // TODO: Test on real device - overlay permission and foreground service notification
                     // Show overlay permission prompt if needed
                     if (!PermissionHelper.hasOverlayPermission(context)) {
                         PermissionHelper.requestOverlayPermission(
