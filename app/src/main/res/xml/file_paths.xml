@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- External public Movies directory where recordings are stored -->
+    <external-path
+        name="movies"
+        path="Movies/ScreenRecords" />
+    
+    <!-- App-specific external files directory as fallback -->
+    <external-files-path
+        name="app_movies"
+        path="Movies/ScreenRecords" />
+</paths>
