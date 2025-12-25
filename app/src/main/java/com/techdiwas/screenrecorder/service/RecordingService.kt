@@ -72,15 +72,25 @@ class RecordingService : Service() {
                 val resultCode = intent.getIntExtra(Constants.EXTRA_RESULT_CODE, -1)
                 val data = intent.getParcelableExtra<Intent>(Constants.EXTRA_RESULT_DATA)
                 
-                // Get configuration from intent
+                // Get configuration from intent with safe enum parsing
                 val audioSourceName = intent.getStringExtra(Constants.EXTRA_AUDIO_SOURCE)
                 val videoQualityName = intent.getStringExtra(Constants.EXTRA_VIDEO_QUALITY)
                 
                 if (audioSourceName != null) {
-                    audioSource = AudioSource.valueOf(audioSourceName)
+                    try {
+                        audioSource = AudioSource.valueOf(audioSourceName)
+                    } catch (e: IllegalArgumentException) {
+                        Log.e(TAG, "Invalid audio source: $audioSourceName", e)
+                        // Use default value (NONE)
+                    }
                 }
                 if (videoQualityName != null) {
-                    videoQuality = VideoQuality.valueOf(videoQualityName)
+                    try {
+                        videoQuality = VideoQuality.valueOf(videoQualityName)
+                    } catch (e: IllegalArgumentException) {
+                        Log.e(TAG, "Invalid video quality: $videoQualityName", e)
+                        // Use default value (QUALITY_720P)
+                    }
                 }
                 
                 if (resultCode != -1 && data != null) {
