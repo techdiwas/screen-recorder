@@ -54,4 +54,36 @@ class FileManager(private val context: Context) {
         val state = Environment.getExternalStorageState()
         return Environment.MEDIA_MOUNTED == state
     }
+
+    /**
+     * Gets all saved recordings sorted by date (newest first).
+     * @return List of RecordingItem objects.
+     */
+    fun getSavedRecordings(): List<RecordingItem> {
+        val directory = getRecordingsDirectory() ?: return emptyList()
+        
+        return directory.listFiles { file ->
+            file.isFile && file.extension.equals("mp4", ignoreCase = true)
+        }?.map { file ->
+            RecordingItem(
+                file = file,
+                name = file.nameWithoutExtension,
+                dateModified = Date(file.lastModified()),
+                sizeBytes = file.length()
+            )
+        }?.sortedByDescending { it.dateModified } ?: emptyList()
+    }
+
+    /**
+     * Deletes a recording file.
+     * @param recording The recording to delete.
+     * @return True if deleted successfully, false otherwise.
+     */
+    fun deleteRecording(recording: RecordingItem): Boolean {
+        return try {
+            recording.file.delete()
+        } catch (e: Exception) {
+            false
+        }
+    }
 }

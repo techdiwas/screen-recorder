@@ -59,4 +59,13 @@
     <string name="error_media_projection">Failed to initialize screen capture</string>
     <string name="error_storage">Failed to access storage</string>
     <string name="error_audio">Failed to initialize audio recording</string>
+    
+    <!-- Recordings List -->
+    <string name="recordings">Recordings</string>
+    <string name="no_recordings">No recordings yet</string>
+    <string name="no_recordings_hint">Your recorded videos will appear here</string>
+    <string name="delete">Delete</string>
+    <string name="delete_recording">Delete recording?</string>
+    <string name="delete_confirmation">Are you sure you want to delete \"%1$s\"?</string>
+    <string name="cancel">Cancel</string>
 </resources>
