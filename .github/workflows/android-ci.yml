@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v5
     
     - name: Set up JDK 17
@@ -24,7 +24,7 @@ jobs:
       run: chmod +x gradlew
     
     - name: Cache Gradle packages
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ~/.gradle/caches
@@ -33,18 +33,24 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
     
-    - name: Build with Gradle
-      run: ./gradlew build --stacktrace --info
-    
     - name: Run unit tests
-      run: ./gradlew test
+      run: ./gradlew test --stacktrace
     
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v5
+    - name: Build debug APK
+      run: ./gradlew assembleDebug --stacktrace
+    
+    - name: Upload debug APK
+      uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: debug-apk
+        path: app/build/outputs/apk/debug/*.apk
+        retention-days: 7
+    
+    - name: Upload test reports
+      uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: build-artifacts
-        path: |
-          app/build/outputs/apk/
-          app/build/reports/
+        name: test-reports
+        path: app/build/reports/tests/
         retention-days: 7
