@@ -345,6 +345,7 @@ fun RecordingListItem(
     onClick: () -> Unit,
     onDeleteClick: () -> Unit
 ) {
+    val context = LocalContext.current
     val dateFormat = remember { SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault()) }
     
     ListItem(
@@ -371,7 +372,7 @@ fun RecordingListItem(
             IconButton(onClick = onDeleteClick) {
                 Icon(
                     imageVector = Icons.Default.Delete,
-                    contentDescription = "Delete",
+                    contentDescription = context.getString(R.string.delete),
                     tint = MaterialTheme.colorScheme.error
                 )
             }
@@ -401,7 +402,7 @@ private fun playRecording(context: android.content.Context, recording: Recording
         }
         context.startActivity(intent)
     } catch (e: Exception) {
-        Toast.makeText(context, "Unable to play recording", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, context.getString(R.string.error_unable_to_play), Toast.LENGTH_SHORT).show()
     }
 }
 
